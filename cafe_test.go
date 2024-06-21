@@ -18,7 +18,7 @@ func TestMainHandlerWhenCorrect(t *testing.T) {
 	handler := http.HandlerFunc(mainHandle)
 	handler.ServeHTTP(responseRecorder, req)
 
-	require.Equal(t, responseRecorder.Code, http.StatusOK)
+	require.Equal(t, http.StatusOK, responseRecorder.Code)
 	assert.NotNil(t, responseRecorder.Body)
 }
 
@@ -30,7 +30,7 @@ func TestMainHandlerWhenCityWrong(t *testing.T) {
 	handler := http.HandlerFunc(mainHandle)
 	handler.ServeHTTP(responseRecorder, req)
 
-	require.Equal(t, responseRecorder.Code, http.StatusBadRequest)
+	require.Equal(t, http.StatusBadRequest, responseRecorder.Code)
 
 	errCity := "wrong city value"
 	assert.Equal(t, responseRecorder.Body.String(), errCity)
@@ -46,7 +46,7 @@ func TestMainHandlerWhenCountMoreThanTotal(t *testing.T) {
 	handler := http.HandlerFunc(mainHandle)
 	handler.ServeHTTP(responseRecorder, req)
 
-	require.Equal(t, responseRecorder.Code, http.StatusOK)
+	require.Equal(t, http.StatusOK, responseRecorder.Code)
 	assert.NotNil(t, responseRecorder.Body)
 
 	body := responseRecorder.Body.String()
